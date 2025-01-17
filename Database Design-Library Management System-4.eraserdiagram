@@ -1,0 +1,51 @@
+entity-relationship-diagram
+
+title Library Management System
+members [icon: users, color: green]{
+_id string pk
+name string
+address string
+email string 
+membershipDate Date
+createdAt Date
+updatedAt Date
+}
+
+librarian [icon: user, color: orange]{
+_id string pk
+name string 
+email string
+number number
+createdAt Date
+updatedAt Date
+}
+
+books [icon: book, color: blue]{
+_id string pk
+name string
+author string
+categories string
+numberOfCopies number
+createdAt Date
+updatedAt Date
+}
+
+categories [icon: list, color: purple]{
+_id string pk
+name string
+categories objectId[] bookId
+}
+
+transactions [icon: list, color: red]{
+_id string pk
+memberId objectId transactions
+transactionDate Date
+createdAt Date
+updatedAt Date
+memberId string
+bookId string
+}
+members._id > transactions.memberId
+books._id > transactions.bookId
+books.categories <> categories._id
+librarian._id > transactions.librarianId

@@ -1,0 +1,34 @@
+entity-relationship-diagram
+
+title ToDo ER Diagram
+todos [icon: list] {
+_id string pk
+content string
+complete boolean
+subTodos objectId[] subtodos
+createdBy objectId users
+createdAt Date
+updatedAt Date
+}
+
+users [icon : user]{
+ _id string pk
+ username string 
+ email string
+ password string
+}
+
+subTodos [icon: list]{
+  _id string pk
+  content string 
+  compelete boolean
+  createdBy objectId user
+createdAt Date
+updatedAt Date
+}
+
+todos.subTodos < subTodos._id
+todos.createdBy - users._id
+subTodos.createdBy - users._id
+
+

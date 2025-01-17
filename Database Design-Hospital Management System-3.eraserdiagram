@@ -1,0 +1,54 @@
+entity-relationship-diagram
+
+title Hospital Management System
+hospitals [icon : building]{
+_id string pk
+name string
+addressLine1 string
+addressLine2 string
+city string
+pincode string
+specialization string []
+createdAt Date
+updatedAt Date
+}
+
+patients [icon : user]{
+_id string pk
+name string
+consultedWith string
+address string
+age number
+gender enum "M","F","O"
+bloodgroup string
+admittedIn objectId hospitals
+createdAt Date
+updatedAt Date
+}
+
+doctors [icon : stethoscope]{
+_id string pk
+name string
+salary string
+qualification string
+experienceInYears number
+worksInHospitals objectId[] hospitals
+createdAt Date
+updatedAt Date
+}
+
+medicalRecords [icon : clipboard]{
+_id string pk
+patientId objectId patients
+examinedAt Date
+issue string
+description string 
+createdAt Date
+updatedAt Date
+}
+
+patients.admittedIn - hospitals._id
+doctors.worksInHospitals < hospitals._id
+medicalRecords.patientId - patients._id
+
+

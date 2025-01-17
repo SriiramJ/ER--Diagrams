@@ -1,0 +1,55 @@
+entity-relationship-diagram
+
+title E Commerce ER Diagram
+users [icon : user]{
+ _id string pk
+ username string
+ email string 
+ password string
+}
+
+products [icon : box]{
+ _id string pk
+ name string
+ description string
+ productImage string
+ price number
+ stock number
+ category objectId categories
+ owner objectId users
+ createdAt Date
+ updatedAt Date
+}
+
+categories [icon : package]{
+_id string pk
+name string
+createdAt Date
+updatedAt Date
+}
+
+orderItems [icon : list]{
+ _id string pk
+ productId objectId products
+ quantity number
+}
+
+orders [icon : list]{
+ _id string pk
+ customer objectId users
+ orderItems objectId[] orderItems
+ address string
+ status enum "PENDING","CANCELLED","DELIVERED"
+ paymentId string
+ createdAt Date
+ updatedAt Date
+}
+
+products.category - categories._id
+products.owner - users._id
+orderItems.productId - products._id
+orders.customer - users._id
+orders.orderItems < orderItems._id
+
+
+
